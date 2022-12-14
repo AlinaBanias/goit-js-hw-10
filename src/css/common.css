@@ -15,4 +15,9 @@ body {
 img {
   display: block;
   max-width: 100%;
+  list-style: none;
+}
+
+ul {
+  list-style: none;
 }

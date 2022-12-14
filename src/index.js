@@ -8,16 +8,16 @@ console.log(fetchCountries);
 const DEBOUNCE_DELAY = 300;
 const TIMEOUT_NOTIFICATION = 4000;
 
-let countryField = document.querySelector('#search-box');
+const countryField = document.querySelector('#search-box');
 const countriesListEl = document.querySelector('.country-list');
 const infoAboutCountryEl = document.querySelector('.country-info');
 
 countryField.addEventListener('input' , debounce(onSearchCountry, DEBOUNCE_DELAY));
 
-
+let valueInput = '';
 
 function onSearchCountry(evet) {
-  const valueInput = evet.target.value.trim();
+   valueInput = evet.target.value.trim();
   if (valueInput.length === 1) {
     Notify.warning('At least 2 letters must be entered to search', {
       timeout: TIMEOUT_NOTIFICATION,
@@ -29,7 +29,6 @@ function onSearchCountry(evet) {
     });
     countriesListEl.innerHTML = '';
     infoAboutCountryEl.innerHTML = '';
-    inPut.removeEventListener('input', evet);
     return;
   }
   fetchCountries(valueInput)
@@ -46,11 +45,11 @@ function onRenderCountriesList(countries) {
   const numberCountriesFound = countries.length;
   const markupCountriesList = countries
     .map(
-      country =>
-        `<li class="country"><img src="${country.flags.svg}"
-      alt="Flag of ${country.name.official}" />
+      country => {
+        return `<li class="country"><img class = "country-img" src="${country.flags.svg}"
+      alt="Flag of ${country.name.official} width="30" height="30" " />
       <h1>${country.name.official}</h1></li>`
-    )
+    })
     .join('');
   countriesListEl.innerHTML = markupCountriesList;
   if (numberCountriesFound === 1) {
@@ -58,11 +57,11 @@ function onRenderCountriesList(countries) {
     bigRenderCountry.classList.add('big');
     const markupInfoAboutCountry = countries
       .map(
-        country =>
-          `<p><b>Capital: </b>${country.capital}</p>
+        country => {
+         return `<p><b>Capital: </b>${country.capital}</p>
          <p><b>Population: </b>${country.population}</p>
          <p><b>Languages: </b>${Object.values(country.languages)}</p>`
-      )
+        })
       .join('');
     infoAboutCountryEl.innerHTML = markupInfoAboutCountry;
     return;

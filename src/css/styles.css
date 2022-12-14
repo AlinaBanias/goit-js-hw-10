@@ -18,6 +18,18 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
-.start-button {
-  padding: 12px;
+/* One country */
+.country.big {
+  display: flex;
+  align-items: center;
+}
+.country-img {
+margin-right: 20px;
+}
+
+/* Many countries */
+
+.country {
+  display: flex;
+  align-items: center;
 }
